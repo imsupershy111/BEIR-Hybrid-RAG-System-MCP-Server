@@ -1,0 +1,16 @@
+# Môi trường ảo
+venv/
+.venv/
+
+# Dữ liệu và DB (Không nên push vì rất nặng)
+chroma_db/
+data/
+
+# Bí mật cá nhân
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+bash_command.txt

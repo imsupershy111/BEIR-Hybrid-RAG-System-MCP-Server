@@ -1,0 +1,42 @@
+# ==========================================
+# 1. MODELS CONFIGURATION
+# ==========================================
+# Ollama Configuration (Dùng cho Embedding Local)
+ollama:
+  base_url: "http://localhost:11434"
+  embedding_model: "nomic-embed-text"
+
+# OpenRouter Configuration (Dùng cho LLM Trả lời)
+openrouter:
+  base_url: "https://openrouter.ai/api/v1"
+  model: "nvidia/nemotron-3-super-120b-a12b:free" 
+
+# ==========================================
+# 2. DATA & PROCESSING
+# ==========================================
+data:
+  directory: "./data" # Thư mục chứa file corpus.jsonl của chuẩn BEIR
+
+document_processing:
+  # Cấu hình cắt chunk cho tài liệu dài. (Với SciFact/FiQA, tài liệu khá ngắn nên 1000/200 là lý tưởng)
+  text_chunk_size: 1000
+  text_chunk_overlap: 200
+
+vector_store:
+  persist_directory: "./chroma_db"
+
+# ==========================================
+# 3. ADVANCED HYBRID RETRIEVAL (BEIR)
+# ==========================================
+retrieval:
+  final_k: 10            # Số lượng tài liệu top đầu được đưa vào cho LLM đọc
+  dense_weight: 0.3      # Trọng số Alpha cho Vector Search (BM25+ sẽ tự động là 1 - 0.3 = 0.7)
+  use_prf: true          # Bật thuật toán Pseudo-Relevance Feedback (Mở rộng truy vấn)
+
+# ==========================================
+# 4. SERVER EXPORT
+# ==========================================
+# Giao diện MCP Server (Dùng nếu bạn muốn cắm hệ thống này vào Claude Desktop)
+mcp_server:
+  host: "0.0.0.0"
+  port: 8000

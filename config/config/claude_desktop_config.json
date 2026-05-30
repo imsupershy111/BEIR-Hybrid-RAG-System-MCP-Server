@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "hybrid-rag": {
+      "command": "C:\\Users\\cubi8\\hybrid-rag-project\\venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\cubi8\\hybrid-rag-project\\scripts\\mcp_server_claude.py"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}
