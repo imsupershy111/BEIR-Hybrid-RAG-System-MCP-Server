@@ -352,7 +352,10 @@ async def handle_call_tool(name: str, arguments: dict) -> list[TextContent]:
 
 async def cleanup():
     global ingestion_task, vectorstore
-    print("\n🛑 Shutting down MCP server...")
+    try:
+        print("\n🛑 Shutting down MCP server...")
+    except (ValueError, OSError):
+        pass  # stdout đã đóng, bỏ qua
     if ingestion_task and not ingestion_task.done():
         ingestion_task.cancel()
         try:
